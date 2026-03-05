@@ -3,34 +3,23 @@
 import { useState } from "react";
 import Sidebar from "./sidebar";
 import Link from "next/link";
-import { useWindowWidth } from "@/app/hooks/useWindowWidth";
+import { useWindowWidth } from "../app/hooks/useWindowWidth";
+import { UserListProps, Users } from "../app/types";
 
-export default function Userlist({ users }) {
-  const [userData, setUserData] = useState();
+
+export default function Userlist({ users } : UserListProps) {
+  const [userData, setUserData] = useState<Users | null>();
   const isMobile  = useWindowWidth();
   console.log(isMobile, "width");
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "20px",
-        justifyContent: "space-between",
-        padding: "20px",
-      }}
-    >
+    <div className="flex gap-5 justify-between p-5 ">
      
 <div>
       {users && users.map((user) => {
         const content = (
           <p
             onClick={() => setUserData(user)}
-            style={{
-              padding: "5px",
-              cursor: "pointer",
-              background: "grey",
-              marginTop: "5px",
-              color: "greenyellow",
-            }}
+            className="p-1 cursor-pointer bg-grey-100 mt-1.5 text-black border-2 mb-1"
           >
             {user.firstName} {user.lastName}
           </p>
